@@ -19,21 +19,25 @@
         <div class="todo-container">
             <header class="todo-header">My Todo List</header>
             <main>
-                <input type="text" class="todo-input" placeholder="Nuovo Task">
+                <input v-model="newTask" type="text" class="todo-input" placeholder="Nuovo Task">
                 <ul class="todo-list">
-                    <li class="todo-item">
-                        <input type="checkbox">
-                        <span>Task 1</span>
+                    <li v-for="(todo, index) in todos" :key="index" class="todo-item">
+                        <input type="checkbox" v-model="todo.done">
+                        <span :class="{ 'done': todo.done }">{{ todo.text }}</span>
+                        <div @click="removeTodo(index)" class="remove-todo">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
                     </li>
                 </ul>
             </main>
             
             <footer class="footer">
-                Made with &hearts; by my self <br>
+                Made with &hearts; by myself <br>
                 Make sure you don't waste money
             </footer>
         
-            <button class="add-task-button">+</button>
+            <button @click="addTask" class="add-task-button">+</button>
+        </div>
     </div>
 
 
